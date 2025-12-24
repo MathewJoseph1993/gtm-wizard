@@ -1,6 +1,7 @@
 # GTM Wizard
 
 [![CI](https://github.com/MathewJoseph1993/gtm-wizard/actions/workflows/ci.yml/badge.svg)](https://github.com/MathewJoseph1993/gtm-wizard/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/gtm-wizard)](https://pypi.org/project/gtm-wizard/)
 [![Python](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
