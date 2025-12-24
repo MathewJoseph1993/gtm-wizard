@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "gtm-wizard"
-version = "0.1.0"
+version = "0.2.0"
 description = "MCP server packaging Go-To-Market Engineering expertise for AI agents"
 readme = "README.md"
 license = "MIT"
@@ -42,12 +42,12 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0.0,<10.0.0",
-    "pytest-asyncio>=0.21.0,<1.0.0",
-    "pytest-cov>=4.0.0,<6.0.0",
+    "pytest-asyncio>=0.21.0,<2.0.0",
+    "pytest-cov>=4.0.0,<8.0.0",
     "mypy>=1.0.0,<2.0.0",
     "ruff>=0.1.0",
     "build>=1.0.0,<2.0.0",
-    "twine>=4.0.0,<6.0.0",
+    "twine>=4.0.0,<7.0.0",
 ]
 
 [project.urls]
