@@ -1,5 +1,7 @@
 """GTM Wizard MCP Server - Go-To-Market Engineering expertise for AI agents."""
 
+from typing import Any
+
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp.types import TextContent, Tool
@@ -8,7 +10,7 @@ from mcp.types import TextContent, Tool
 server = Server("gtm-wizard")
 
 
-@server.list_tools()
+@server.list_tools()  # type: ignore[no-untyped-call, untyped-decorator]
 async def list_tools() -> list[Tool]:
     """List available GTM engineering tools."""
     return [
@@ -34,8 +36,8 @@ async def list_tools() -> list[Tool]:
     ]
 
 
-@server.call_tool()
-async def call_tool(name: str, arguments: dict) -> list[TextContent]:
+@server.call_tool()  # type: ignore[no-untyped-call, untyped-decorator]
+async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
     """Handle tool calls."""
     if name == "diagnose_rate_limiting":
         api_name = arguments.get("api_name", "Unknown API")
@@ -69,7 +71,7 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
     return [TextContent(type="text", text=f"Unknown tool: {name}")]
 
 
-async def main():
+async def main() -> None:
     """Run the GTM Wizard MCP server."""
     async with stdio_server() as (read_stream, write_stream):
         await server.run(

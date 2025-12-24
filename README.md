@@ -15,7 +15,7 @@ An MCP (Model Context Protocol) server that gives AI agents the knowledge of a s
 
 - **Rate Limiting Diagnosis** - Debug API rate limit issues with actionable recommendations
 - **Production-Tested** - Patterns from systems processing thousands of leads daily
-- **AI-Native** - Designed for Claude, Cursor, and other MCP-compatible clients
+- **AI-Native** - Designed for Claude Desktop, Cursor, and other MCP-compatible clients
 
 ### Coming Soon
 
@@ -26,18 +26,19 @@ An MCP (Model Context Protocol) server that gives AI agents the knowledge of a s
 
 ## Installation
 
-### Using pip
-
-```bash
-pip install gtm-wizard
-```
-
-### From source
+### From Source
 
 ```bash
 git clone https://github.com/MathewJoseph1993/gtm-wizard.git
 cd gtm-wizard
 pip install -e .
+```
+
+### From PyPI (Coming Soon)
+
+Once published to PyPI:
+```bash
+pip install gtm-wizard
 ```
 
 ## Quick Start
@@ -56,6 +57,8 @@ Add to your config (`~/Library/Application Support/Claude/claude_desktop_config.
   }
 }
 ```
+
+See [examples/claude_desktop_config.md](examples/claude_desktop_config.md) for detailed setup instructions.
 
 ### Cursor
 
@@ -110,6 +113,10 @@ I'm getting 429 errors from HubSpot when syncing contacts. Can you help diagnose
 | New GTM engineers need ramp time | Instant access to senior-level knowledge |
 | AI agents lack GTM context | Purpose-built for GTM workflows |
 
+## Architecture
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture documentation.
+
 ## Development
 
 ```bash
@@ -125,6 +132,10 @@ make lint        # Lint code
 make format      # Format code
 make type-check  # Type checking
 ```
+
+### Adding New Tools
+
+See [docs/ADDING_TOOLS.md](docs/ADDING_TOOLS.md) for a guide on adding new MCP tools.
 
 ### Testing with MCP Inspector
 
