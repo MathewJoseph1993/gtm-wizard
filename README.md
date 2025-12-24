@@ -56,21 +56,13 @@ GTM Engineering knowledge accessible via `gtm://foundations/{resource-id}`:
 
 ## Installation
 
-### From Source (Recommended)
-
-We use [UV](https://docs.astral.sh/uv/) for fast, reliable dependency management:
+### From PyPI (Recommended)
 
 ```bash
-# Install UV (if not already installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Clone and setup
-git clone https://github.com/MathewJoseph1993/gtm-wizard.git
-cd gtm-wizard
-uv sync --all-extras
+pip install gtm-wizard
 ```
 
-### From Source (pip)
+### From Source (for contributors)
 
 ```bash
 git clone https://github.com/MathewJoseph1993/gtm-wizard.git
@@ -82,7 +74,24 @@ pip install -e ".[dev]"
 
 ### Claude Desktop
 
-Add to your config (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+Add to your Claude Desktop config:
+
+**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+**Linux:** `~/.config/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "gtm-wizard": {
+      "command": "uvx",
+      "args": ["gtm-wizard"]
+    }
+  }
+}
+```
+
+Alternative (if you installed with pip):
 
 ```json
 {
@@ -97,20 +106,26 @@ Add to your config (`~/Library/Application Support/Claude/claude_desktop_config.
 
 ### Cursor
 
-Add to Cursor MCP settings:
+Add to Cursor MCP settings (Settings → MCP → Add Server):
 
 ```json
 {
   "mcpServers": {
     "gtm-wizard": {
-      "command": "python",
-      "args": ["-m", "gtm_wizard.server"]
+      "command": "uvx",
+      "args": ["gtm-wizard"]
     }
   }
 }
 ```
 
 ### Claude Code CLI
+
+```bash
+claude mcp add gtm-wizard -- uvx gtm-wizard
+```
+
+Or if installed with pip:
 
 ```bash
 claude mcp add gtm-wizard -- python -m gtm_wizard.server
