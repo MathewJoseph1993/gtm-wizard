@@ -7,38 +7,74 @@
 
 > **The Senior GTM Engineer in Your Pocket** - Go-To-Market Engineering expertise for AI agents via MCP.
 
-An MCP (Model Context Protocol) server that gives AI agents the knowledge of a senior GTM Engineer. Built from real production systems handling high-velocity lead pipelines.
+An MCP (Model Context Protocol) server that brings world-class GTM Engineering expertise into AI-powered workflows. Built from real production systems handling high-velocity lead pipelines.
 
 **Note:** GTM = Go-To-Market, not Google Tag Manager.
 
+## What is GTM Wizard?
+
+GTM Wizard is the **foundation layer for Agentic GTM** - AI agents that can build and operate GTM machines.
+
+| GTM Wizard IS | GTM Wizard is NOT |
+|---------------|-------------------|
+| An expertise layer AI agents USE | A tutorial or teaching tool |
+| Action-oriented tools with structured outputs | A collection of templates to copy |
+| Flexible components for different contexts | Educational content explaining concepts |
+| The "GTM brain" for autonomous operations | A replacement for strategic thinking |
+
 ## Features
 
-- **Rate Limiting Diagnosis** - Debug API rate limit issues with actionable recommendations
-- **Production-Tested** - Patterns from systems processing thousands of leads daily
-- **AI-Native** - Designed for Claude Desktop, Cursor, and other MCP-compatible clients
+### Tools (6 available)
 
-### Coming Soon
+| Tool | Purpose |
+|------|---------|
+| `score_lead` | Calculate lead scores with transparent breakdown |
+| `classify_role` | Classify job titles into decision-making tiers |
+| `classify_industry` | Determine industry fit based on your ICP |
+| `determine_routing` | Route leads to appropriate engagement tracks |
+| `check_disqualification` | Check for disqualifying factors |
+| `diagnose_rate_limiting` | Debug API rate limit issues |
 
-- Infrastructure architecture patterns
-- Integration blueprints (CRM, enrichment, outreach)
-- Lead qualification frameworks
-- Email deliverability runbooks
+### Prompts (4 available)
+
+| Prompt | Output |
+|--------|--------|
+| `lead-qualification-workflow` | Structured qualification result with routing decision |
+| `icp-definition` | YAML ICP configuration for lead tools |
+| `outbound-campaign-design` | Campaign blueprint with sequence and metrics |
+| `lead-scoring-calibration` | Scoring model calibration recommendations |
+
+### Resources (5 available)
+
+GTM Engineering knowledge accessible via `gtm://foundations/{resource-id}`:
+- `what-is-gtm-engineering` - Core definitions and skills
+- `gtm-archetypes` - 6 specialization types
+- `context-factors` - 8 factors that shape decisions
+- `principles-not-recipes` - GTM Wizard philosophy
+- `knowledge-taxonomy` - Full domain map
 
 ## Installation
 
-### From Source
+### From Source (Recommended)
+
+We use [UV](https://docs.astral.sh/uv/) for fast, reliable dependency management:
+
+```bash
+# Install UV (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Clone and setup
+git clone https://github.com/MathewJoseph1993/gtm-wizard.git
+cd gtm-wizard
+uv sync --all-extras
+```
+
+### From Source (pip)
 
 ```bash
 git clone https://github.com/MathewJoseph1993/gtm-wizard.git
 cd gtm-wizard
-pip install -e .
-```
-
-### From PyPI (Coming Soon)
-
-Once published to PyPI:
-```bash
-pip install gtm-wizard
+pip install -e ".[dev]"
 ```
 
 ## Quick Start
@@ -57,8 +93,6 @@ Add to your config (`~/Library/Application Support/Claude/claude_desktop_config.
   }
 }
 ```
-
-See [examples/claude_desktop_config.md](examples/claude_desktop_config.md) for detailed setup instructions.
 
 ### Cursor
 
@@ -81,84 +115,96 @@ Add to Cursor MCP settings:
 claude mcp add gtm-wizard -- python -m gtm_wizard.server
 ```
 
-Restart your client, then ask:
-> "Help me diagnose rate limiting issues with the HubSpot API"
+## Example Usage
 
-## Available Tools
+### Qualify a Lead
 
-### `diagnose_rate_limiting`
-
-Debug API rate limit issues with GTM-specific recommendations.
-
-**Parameters:**
-- `api_name` (string, required): Name of the API (e.g., HubSpot, Clay, Instantly)
-- `symptoms` (string, required): What's happening (e.g., "429 errors", "slow responses")
-
-**Example prompt:**
 ```
-I'm getting 429 errors from HubSpot when syncing contacts. Can you help diagnose?
+Qualify this lead: john@acmecorp.com, VP of Marketing at Acme Corp
 ```
 
-**Returns:**
-- Common causes analysis
-- Actionable recommendations
-- GTM-specific tips for the API
+GTM Wizard will run the full qualification pipeline and return:
+```
+QUALIFICATION RESULT
+====================
+Lead: john@acmecorp.com
+Status: QUALIFIED
+Score: 65/95 (68%)
+Tier: B
+Routing: medium_touch
 
-## Why GTM Wizard?
+Key Factors:
+- Role: VP Level - 25 points
+- Industry: Unclassified - 10 points
+- Company Size: 20 points
 
-| Problem | Solution |
-|---------|----------|
-| GTM infrastructure is complex | Pre-built patterns from production systems |
-| Knowledge is scattered | Centralized expertise in one MCP |
-| New GTM engineers need ramp time | Instant access to senior-level knowledge |
-| AI agents lack GTM context | Purpose-built for GTM workflows |
+Recommended Action: Enroll in nurture sequence with sales oversight
+```
 
-## Architecture
+### Design a Campaign
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture documentation.
+```
+Design an outbound campaign targeting VP of Sales at SaaS companies, goal is booking demos
+```
+
+Returns a complete `CAMPAIGN_BLUEPRINT` with targeting, sequence, messaging framework, and metrics.
+
+### Build ICP Configuration
+
+```
+Help me build an ICP config for my B2B SaaS product
+```
+
+Returns a structured `ICP_CONFIG` in YAML that feeds into lead scoring tools.
 
 ## Development
 
 ```bash
-# Install dev dependencies
-pip install -e ".[dev]"
+# Sync dependencies (UV)
+uv sync --all-extras
 
 # Run all checks
 make all
 
 # Individual commands
-make test        # Run tests
+make test        # Run tests (50 tests, 85% coverage)
 make lint        # Lint code
 make format      # Format code
-make type-check  # Type checking
+make type-check  # Type checking (strict)
+make serve       # Run the MCP server
+make inspect     # Open MCP Inspector
 ```
-
-### Adding New Tools
-
-See [docs/ADDING_TOOLS.md](docs/ADDING_TOOLS.md) for a guide on adding new MCP tools.
 
 ### Testing with MCP Inspector
 
 ```bash
-npx @modelcontextprotocol/inspector python -m gtm_wizard.server
+make inspect
 ```
+
+Opens browser at `http://localhost:6274` for visual tool testing.
 
 ## Roadmap
 
-- [ ] Infrastructure architecture prompts
-- [ ] Integration pattern library (Clay, Apollo, Instantly)
-- [ ] Lead scoring frameworks
-- [ ] Email operations knowledge base
-- [ ] Multi-channel orchestration patterns
+See [ROADMAP.md](ROADMAP.md) for full details.
+
+**Current:** v0.2 - Lead Intelligence (Complete)
+**Next:** v0.3 - Outbound Automation
+
+Future milestones include:
+- Outbound campaign execution tools
+- Data & analytics capabilities
+- CRM integration patterns
+- Agentic integrations (HubSpot MCP, email tools, context awareness)
 
 ## Contributing
 
 Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-We're especially looking for:
-- Real-world GTM patterns and use cases
-- Integration blueprints
-- Documentation improvements
+**Content Guidelines:**
+- Action-oriented - tools DO things, don't explain things
+- Structured outputs - produce configs, blueprints, decisions
+- Integration-ready - design for CRM/tool connections
+- Expert application - apply GTM expertise, don't lecture
 
 ## License
 
@@ -166,4 +212,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-*Built by [Mathew Joseph](https://github.com/MathewJoseph1993) - GTM Engineer at Rwazi*
+*Built by [Mathew Joseph](https://github.com/MathewJoseph1993) - GTM Engineer*
