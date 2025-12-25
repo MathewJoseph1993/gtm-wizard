@@ -953,8 +953,8 @@ async def read_resource(uri: str) -> TextResourceContents:
     raise ValueError(f"Unknown resource: {uri}")
 
 
-async def main() -> None:
-    """Run the GTM Wizard MCP server."""
+async def _run_server() -> None:
+    """Run the GTM Wizard MCP server (async implementation)."""
     async with stdio_server() as (read_stream, write_stream):
         await server.run(
             read_stream,
@@ -963,7 +963,12 @@ async def main() -> None:
         )
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Entry point for the GTM Wizard MCP server."""
     import asyncio
 
-    asyncio.run(main())
+    asyncio.run(_run_server())
+
+
+if __name__ == "__main__":
+    main()
