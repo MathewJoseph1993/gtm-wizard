@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-GTM Wizard is an MCP (Model Context Protocol) server that packages Go-To-Market Engineering expertise for AI agents. It exposes tools, prompts, and resources that AI agents can use for lead qualification, campaign design, and GTM decision-making.
+GTM Wizard is an open-source AI-powered GTM operating system for solo founders. The core is an MCP (Model Context Protocol) server that packages Go-To-Market Engineering expertise for AI agents.
 
 - **PyPI:** https://pypi.org/project/gtm-wizard/
 - **Current Version:** 0.2.1
@@ -27,59 +27,65 @@ make serve       # Run MCP server locally
 make inspect     # Open MCP Inspector at localhost:6274
 
 # Run single test
-uv run pytest tests/test_tools.py::TestScoreLead -v
+uv run pytest packages/mcp-server/tests/test_tools.py::TestScoreLead -v
 
 # Build and publish to PyPI
 make build       # Build dist/
 make publish     # Upload to PyPI
 ```
 
-## Code Architecture
-
-### MCP Server Structure
+## Monorepo Architecture
 
 ```
-src/gtm_wizard/
-├── server.py              # MCP server entry point - handles all tool/resource/prompt routing
-├── tools/
-│   └── qualification.py   # Lead scoring, routing, classification functions
-└── resources/
-    └── foundations/       # Markdown knowledge files (GTM concepts)
+gtm-wizard/
+├── packages/
+│   ├── mcp-server/           # GTM Expertise Engine (Python) - ACTIVE
+│   │   ├── src/gtm_wizard/
+│   │   │   ├── server.py     # MCP server entry point
+│   │   │   ├── tools/        # Lead scoring, qualification functions
+│   │   │   └── resources/    # Knowledge base (markdown)
+│   │   └── tests/
+│   ├── dashboard/            # Web Frontend (Next.js) - PLACEHOLDER
+│   └── ai-agent/             # AI Orchestration (Python + LiteLLM) - PLACEHOLDER
+├── docs/
+│   ├── 00_vision/            # Architecture, pricing, vision
+│   ├── 01_research/          # Market research, pain points
+│   ├── 02_planning/          # MVP scope, stack research
+│   ├── 03_decisions/         # Architecture Decision Records
+│   └── session_handoffs/     # Session continuity
+└── pyproject.toml            # Root config (points to packages/mcp-server)
 ```
+
+## MCP Server (`packages/mcp-server/`)
 
 ### Entry Point
 
-`server.py` is the main MCP server implementing three primitives:
+`server.py` implements three MCP primitives:
 - **Tools** - Action functions (score_lead, classify_role, determine_routing, etc.)
 - **Resources** - Knowledge base via `gtm://foundations/{resource-id}` URIs
 - **Prompts** - Workflow templates (lead-qualification-workflow, icp-definition, etc.)
 
 ### Adding New Tools
 
-1. Create functions in `src/gtm_wizard/tools/` following the `qualification.py` pattern
+1. Create functions in `packages/mcp-server/src/gtm_wizard/tools/` following `qualification.py` pattern
 2. Register in `server.py`:
    - Add to `list_tools()` with input schema
    - Add handler in `call_tool()`
-3. Write tests in `tests/test_tools.py`
+3. Write tests in `packages/mcp-server/tests/test_tools.py`
 
 ### Adding New Resources
 
-1. Create markdown file in `src/gtm_wizard/resources/foundations/`
+1. Create markdown file in `packages/mcp-server/src/gtm_wizard/resources/foundations/`
 2. Register URI pattern in `server.py` `list_resources()` and `read_resource()`
 
-### Adding New Prompts
+## Selected Tech Stack (for future packages)
 
-1. Add prompt definition in `server.py` `list_prompts()`
-2. Add handler in `get_prompt()` returning messages with arguments
-
-## Testing
-
-Tests are in `tests/` with separate files for tools, resources, and prompts:
-- `tests/test_tools.py` - Tool function tests
-- `tests/test_resources.py` - Resource loading tests
-- `tests/test_prompts.py` - Prompt generation tests
-
-Coverage threshold is 80% and enforced in CI.
+| Component | Technology |
+|-----------|------------|
+| Database | PocketBase |
+| Auth | PocketBase built-in |
+| AI Orchestration | LiteLLM (BYOK) |
+| Frontend | Next.js + shadcn/ui |
 
 ## Commit Guidelines
 
@@ -89,13 +95,10 @@ Coverage threshold is 80% and enforced in CI.
 
 ## Terminology (Public Code)
 
-Avoid Cannonball GTM terminology in public-facing code:
-- ❌ PVP, EDP, PQS, PEA Framework, F.I.N.D.
-
-Use original terms:
-- "Insight-Led Outreach" (not PVP)
-- "Decision Trigger" (not EDP)
-- "High-Intent Segment" (not PQS)
+Avoid Cannonball GTM terminology:
+- Use "Insight-Led Outreach" (not PVP)
+- Use "Decision Trigger" (not EDP)
+- Use "High-Intent Segment" (not PQS)
 
 ## Session Continuity
 
@@ -108,6 +111,7 @@ docs/session_handoffs/SESSION_YYYY-MM-DD_*.md
 
 | Document | Purpose |
 |----------|---------|
-| `docs/00_vision/ARCHITECTURE.md` | System architecture and future monorepo structure |
-| `docs/01_research/RESEARCH_SUMMARY.md` | Market research informing product decisions |
+| `docs/00_vision/ARCHITECTURE.md` | System architecture |
+| `docs/02_planning/MVP_SCOPE.md` | v0.3 feature scope |
+| `docs/02_planning/OSS_STACK_RESEARCH.md` | Technology decisions |
 | `docs/03_decisions/ADR_*.md` | Architecture Decision Records |
