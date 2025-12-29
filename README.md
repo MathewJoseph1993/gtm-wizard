@@ -4,228 +4,157 @@
 [![PyPI](https://img.shields.io/pypi/v/gtm-wizard)](https://pypi.org/project/gtm-wizard/)
 [![Python](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
-> **The Senior GTM Engineer in Your Pocket** - Go-To-Market Engineering expertise for AI agents via MCP.
+> **Stop guessing if it's working. Know you're on track.**
 
-An MCP (Model Context Protocol) server that brings world-class GTM Engineering expertise into AI-powered workflows. Built from real production systems handling high-velocity lead pipelines.
+An open-source AI-powered GTM operating system for solo founders. Self-hosted, BYOK (Bring Your Own Key), completely free.
 
 **Note:** GTM = Go-To-Market, not Google Tag Manager.
 
 ## What is GTM Wizard?
 
-GTM Wizard is the **foundation layer for Agentic GTM** - AI agents that can build and operate GTM machines.
+GTM Wizard helps solo founders running outbound campaigns answer one question: **"Am I failing or is this normal?"**
 
-| GTM Wizard IS | GTM Wizard is NOT |
-|---------------|-------------------|
-| An expertise layer AI agents USE | A tutorial or teaching tool |
-| Action-oriented tools with structured outputs | A collection of templates to copy |
-| Flexible components for different contexts | Educational content explaining concepts |
-| The "GTM brain" for autonomous operations | A replacement for strategic thinking |
+| Problem | Solution |
+|---------|----------|
+| "My reply rate is 2%. Is that bad?" | Traffic Light signals (RED/YELLOW/GREEN) with benchmarks |
+| "I've been at this for 2 weeks with no results" | Day 21 Breakthrough - education on the persistence gap |
+| "What should I do differently?" | AI coaching with GTM expertise |
+| "I don't want my data in someone else's cloud" | 100% self-hosted, runs on your machine |
 
 ## Features
 
-### Tools (6 available)
+### Dashboard (Coming in v0.3)
+
+- **Traffic Light Signals** - RED/YELLOW/GREEN based on industry benchmarks
+- **Streak Visualizer** - GitHub-style activity graph for consistency
+- **Day 21 Breakthrough** - Educational module on the persistence gap
+- **AI Coaching** - BYOK chat with GTM expertise
+
+### MCP Server (Available Now - v0.2.1)
+
+The GTM expertise engine, usable with Claude Desktop, Cursor, or any MCP client.
 
 | Tool | Purpose |
 |------|---------|
 | `score_lead` | Calculate lead scores with transparent breakdown |
 | `classify_role` | Classify job titles into decision-making tiers |
-| `classify_industry` | Determine industry fit based on your ICP |
 | `determine_routing` | Route leads to appropriate engagement tracks |
-| `check_disqualification` | Check for disqualifying factors |
-| `diagnose_rate_limiting` | Debug API rate limit issues |
 
-### Prompts (4 available)
+## Architecture
 
-| Prompt | Output |
-|--------|--------|
-| `lead-qualification-workflow` | Structured qualification result with routing decision |
-| `icp-definition` | YAML ICP configuration for lead tools |
-| `outbound-campaign-design` | Campaign blueprint with sequence and metrics |
-| `lead-scoring-calibration` | Scoring model calibration recommendations |
-
-### Resources (5 available)
-
-GTM Engineering knowledge accessible via `gtm://foundations/{resource-id}`:
-- `what-is-gtm-engineering` - Core definitions and skills
-- `gtm-archetypes` - 6 specialization types
-- `context-factors` - 8 factors that shape decisions
-- `principles-not-recipes` - GTM Wizard philosophy
-- `knowledge-taxonomy` - Full domain map
+```
+┌─────────────────────────────────────────────────────────────┐
+│  GTM WIZARD                                                  │
+│                                                              │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────┐ │
+│  │   Dashboard     │  │   AI Layer      │  │  MCP Server  │ │
+│  │   (Next.js)     │  │   (LiteLLM)     │  │  (Python)    │ │
+│  │                 │  │                 │  │              │ │
+│  │  • Traffic      │  │  • BYOK         │  │  • Lead      │ │
+│  │    Light        │  │  • OpenAI       │  │    Scoring   │ │
+│  │  • Streak       │  │  • Anthropic    │  │  • Routing   │ │
+│  │    Visualizer   │  │  • Ollama       │  │  • GTM       │ │
+│  │  • Settings     │  │                 │  │    Expertise │ │
+│  └────────┬────────┘  └────────┬────────┘  └──────┬───────┘ │
+│           │                    │                   │         │
+│           └────────────────────┼───────────────────┘         │
+│                                │                             │
+│                    ┌───────────┴───────────┐                 │
+│                    │     PocketBase        │                 │
+│                    │   (Database + Auth)   │                 │
+│                    └───────────────────────┘                 │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## Installation
 
-### From PyPI (Recommended)
+### MCP Server Only (Available Now)
 
 ```bash
 pip install gtm-wizard
 ```
 
-### From Source (for contributors)
+Add to Claude Desktop config:
+
+```json
+{
+  "mcpServers": {
+    "gtm-wizard": {
+      "command": "uvx",
+      "args": ["gtm-wizard"]
+    }
+  }
+}
+```
+
+### Full Platform (Coming Soon)
 
 ```bash
-git clone https://github.com/MathewJoseph1993/gtm-wizard.git
+git clone https://github.com/MathewJoseph1993/gtm-wizard
 cd gtm-wizard
-pip install -e ".[dev]"
+docker-compose up -d
+# Visit http://localhost:3000
 ```
 
-## Quick Start
+## Tech Stack
 
-### Claude Desktop
+| Component | Technology | Why |
+|-----------|------------|-----|
+| **Frontend** | Next.js + shadcn/ui | Largest ecosystem, best AI assistance |
+| **Backend** | PocketBase | Single binary, zero-config |
+| **AI Layer** | LiteLLM | BYOK, 100+ providers |
+| **MCP Server** | Python + FastMCP | GTM expertise tools |
+| **Deployment** | Docker Compose | One-command self-hosting |
 
-Add to your Claude Desktop config:
-
-**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
-**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
-**Linux:** `~/.config/Claude/claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "gtm-wizard": {
-      "command": "uvx",
-      "args": ["gtm-wizard"]
-    }
-  }
-}
-```
-
-Alternative (if you installed with pip):
-
-```json
-{
-  "mcpServers": {
-    "gtm-wizard": {
-      "command": "python",
-      "args": ["-m", "gtm_wizard.server"]
-    }
-  }
-}
-```
-
-### Cursor
-
-Add to Cursor MCP settings (Settings → MCP → Add Server):
-
-```json
-{
-  "mcpServers": {
-    "gtm-wizard": {
-      "command": "uvx",
-      "args": ["gtm-wizard"]
-    }
-  }
-}
-```
-
-### Claude Code CLI
-
-```bash
-claude mcp add gtm-wizard -- uvx gtm-wizard
-```
-
-Or if installed with pip:
-
-```bash
-claude mcp add gtm-wizard -- python -m gtm_wizard.server
-```
-
-## Example Usage
-
-### Qualify a Lead
+## Project Structure
 
 ```
-Qualify this lead: john@acmecorp.com, VP of Marketing at Acme Corp
+gtm-wizard/
+├── packages/
+│   ├── mcp-server/      # GTM expertise engine (Python)
+│   ├── dashboard/       # Web UI (Next.js)
+│   └── ai-agent/        # AI orchestration (Python + LiteLLM)
+├── pocketbase/          # Database + Auth
+├── docs/                # Vision, research, planning
+└── docker-compose.yml   # One-command deployment
 ```
 
-GTM Wizard will run the full qualification pipeline and return:
-```
-QUALIFICATION RESULT
-====================
-Lead: john@acmecorp.com
-Status: QUALIFIED
-Score: 65/95 (68%)
-Tier: B
-Routing: medium_touch
+## Roadmap
 
-Key Factors:
-- Role: VP Level - 25 points
-- Industry: Unclassified - 10 points
-- Company Size: 20 points
+| Version | Focus | Status |
+|---------|-------|--------|
+| v0.1 | MCP Foundation | Complete |
+| v0.2 | Lead Intelligence Tools | Complete |
+| **v0.3** | **Dashboard MVP** | **In Progress** |
+| v0.4 | Instantly Integration | Planned |
+| v0.5 | AI Coaching | Planned |
 
-Recommended Action: Enroll in nurture sequence with sales oversight
-```
-
-### Design a Campaign
-
-```
-Design an outbound campaign targeting VP of Sales at SaaS companies, goal is booking demos
-```
-
-Returns a complete `CAMPAIGN_BLUEPRINT` with targeting, sequence, messaging framework, and metrics.
-
-### Build ICP Configuration
-
-```
-Help me build an ICP config for my B2B SaaS product
-```
-
-Returns a structured `ICP_CONFIG` in YAML that feeds into lead scoring tools.
+See [ROADMAP.md](ROADMAP.md) for details.
 
 ## Development
 
 ```bash
-# Sync dependencies (UV)
+# MCP Server
+cd packages/mcp-server
 uv sync --all-extras
+make test
 
-# Run all checks
-make all
-
-# Individual commands
-make test        # Run tests (50 tests, 85% coverage)
-make lint        # Lint code
-make format      # Format code
-make type-check  # Type checking (strict)
-make serve       # Run the MCP server
-make inspect     # Open MCP Inspector
+# Dashboard
+cd packages/dashboard
+npm install
+npm run dev
 ```
-
-### Testing with MCP Inspector
-
-```bash
-make inspect
-```
-
-Opens browser at `http://localhost:6274` for visual tool testing.
-
-## Roadmap
-
-See [ROADMAP.md](ROADMAP.md) for full details.
-
-**Current:** v0.2 - Lead Intelligence (Complete)
-**Next:** v0.3 - Outbound Automation
-
-Future milestones include:
-- Outbound campaign execution tools
-- Data & analytics capabilities
-- CRM integration patterns
-- Agentic integrations (HubSpot MCP, email tools, context awareness)
 
 ## Contributing
 
-Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-**Content Guidelines:**
-- Action-oriented - tools DO things, don't explain things
-- Structured outputs - produce configs, blueprints, decisions
-- Integration-ready - design for CRM/tool connections
-- Expert application - apply GTM expertise, don't lecture
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License - see [LICENSE](LICENSE).
 
 ---
 
-*Built by [Mathew Joseph](https://github.com/MathewJoseph1993) - GTM Engineer*
+*Built by [Mathew Joseph](https://github.com/MathewJoseph1993) - GTM Engineer with 8 years experience*
