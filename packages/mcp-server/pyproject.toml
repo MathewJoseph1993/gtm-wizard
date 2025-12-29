@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "gtm-wizard"
 version = "0.2.1"
 description = "MCP server packaging Go-To-Market Engineering expertise for AI agents"
-readme = "README.md"
+readme = "../../README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [
@@ -60,7 +60,7 @@ Issues = "https://github.com/MathewJoseph1993/gtm-wizard/issues"
 gtm-wizard = "gtm_wizard.server:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["packages/mcp-server/src/gtm_wizard"]
+packages = ["src/gtm_wizard"]
 
 # Ruff configuration (linting + formatting)
 [tool.ruff]
@@ -93,13 +93,13 @@ warn_unused_ignores = false
 
 # Pytest configuration
 [tool.pytest.ini_options]
-testpaths = ["packages/mcp-server/tests"]
+testpaths = ["tests"]
 asyncio_mode = "auto"
-addopts = "-v --cov=packages/mcp-server/src/gtm_wizard --cov-report=term-missing"
+addopts = "-v --cov=src/gtm_wizard --cov-report=term-missing"
 
 # Coverage configuration
 [tool.coverage.run]
-source = ["packages/mcp-server/src/gtm_wizard"]
+source = ["src/gtm_wizard"]
 branch = true
 
 [tool.coverage.report]
