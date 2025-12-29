@@ -4,23 +4,24 @@
 [![PyPI](https://img.shields.io/pypi/v/gtm-wizard)](https://pypi.org/project/gtm-wizard/)
 [![Python](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Website](https://img.shields.io/badge/website-gtmwizard.io-blue)](https://gtmwizard.io)
 
-> **Stop guessing if it's working. Know you're on track.**
+> **The GTM Engineer in your pocket.**
 
-An open-source AI-powered GTM operating system for solo founders. Self-hosted, BYOK (Bring Your Own Key), completely free.
+AI-powered go-to-market intelligence with benchmarks, signals, and coaching. Open-source, self-hosted option available, cloud version coming soon.
 
 **Note:** GTM = Go-To-Market, not Google Tag Manager.
 
 ## What is GTM Wizard?
 
-GTM Wizard helps solo founders running outbound campaigns answer one question: **"Am I failing or is this normal?"**
+GTM Wizard helps founders and GTM teams answer one question: **"Am I failing or is this normal?"**
 
 | Problem | Solution |
 |---------|----------|
 | "My reply rate is 2%. Is that bad?" | Traffic Light signals (RED/YELLOW/GREEN) with benchmarks |
 | "I've been at this for 2 weeks with no results" | Day 21 Breakthrough - education on the persistence gap |
 | "What should I do differently?" | AI coaching with GTM expertise |
-| "I don't want my data in someone else's cloud" | 100% self-hosted, runs on your machine |
+| "I want control over my data" | Self-hosted option OR cloud at [gtmwizard.io](https://gtmwizard.io) |
 
 ## Features
 
@@ -89,13 +90,15 @@ Add to Claude Desktop config:
 }
 ```
 
-### Full Platform (Coming Soon)
+### Full Platform
 
+**Cloud (Coming Soon):** [gtmwizard.io](https://gtmwizard.io)
+
+**Self-Hosted:**
 ```bash
 git clone https://github.com/MathewJoseph1993/gtm-wizard
 cd gtm-wizard
 docker-compose up -d
-# Visit http://localhost:3000
 ```
 
 ## Tech Stack
