@@ -1,0 +1,274 @@
+[
+  {
+    "name": "api_keys",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "name": "user",
+        "type": "relation",
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "name": "provider",
+        "type": "select",
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": ["openai", "anthropic", "ollama", "google"]
+        }
+      },
+      {
+        "name": "key_encrypted",
+        "type": "text",
+        "required": true,
+        "options": {}
+      },
+      {
+        "name": "model_preference",
+        "type": "text",
+        "required": false,
+        "options": {}
+      }
+    ],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null
+  },
+  {
+    "name": "tool_connections",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "name": "user",
+        "type": "relation",
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "name": "tool",
+        "type": "select",
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": ["instantly", "apollo", "csv"]
+        }
+      },
+      {
+        "name": "credentials_encrypted",
+        "type": "text",
+        "required": false,
+        "options": {}
+      },
+      {
+        "name": "last_synced_at",
+        "type": "date",
+        "required": false,
+        "options": {}
+      },
+      {
+        "name": "status",
+        "type": "select",
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": ["active", "error", "disconnected"]
+        }
+      },
+      {
+        "name": "error_message",
+        "type": "text",
+        "required": false,
+        "options": {}
+      }
+    ],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null
+  },
+  {
+    "name": "daily_metrics",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "name": "user",
+        "type": "relation",
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "required": true,
+        "options": {}
+      },
+      {
+        "name": "emails_sent",
+        "type": "number",
+        "required": false,
+        "options": {
+          "min": 0
+        }
+      },
+      {
+        "name": "opens",
+        "type": "number",
+        "required": false,
+        "options": {
+          "min": 0
+        }
+      },
+      {
+        "name": "replies",
+        "type": "number",
+        "required": false,
+        "options": {
+          "min": 0
+        }
+      },
+      {
+        "name": "meetings_booked",
+        "type": "number",
+        "required": false,
+        "options": {
+          "min": 0
+        }
+      },
+      {
+        "name": "bounces",
+        "type": "number",
+        "required": false,
+        "options": {
+          "min": 0
+        }
+      },
+      {
+        "name": "source",
+        "type": "select",
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": ["instantly", "apollo", "csv", "manual"]
+        }
+      }
+    ],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null
+  },
+  {
+    "name": "chat_history",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "name": "user",
+        "type": "relation",
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "name": "session_id",
+        "type": "text",
+        "required": true,
+        "options": {}
+      },
+      {
+        "name": "role",
+        "type": "select",
+        "required": true,
+        "options": {
+          "maxSelect": 1,
+          "values": ["user", "assistant", "system"]
+        }
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "required": true,
+        "options": {}
+      }
+    ],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null
+  },
+  {
+    "name": "user_settings",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "name": "user",
+        "type": "relation",
+        "required": true,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "name": "onboarding_completed",
+        "type": "bool",
+        "required": false,
+        "options": {}
+      },
+      {
+        "name": "onboarding_step",
+        "type": "number",
+        "required": false,
+        "options": {}
+      },
+      {
+        "name": "timezone",
+        "type": "text",
+        "required": false,
+        "options": {}
+      },
+      {
+        "name": "streak_start_date",
+        "type": "date",
+        "required": false,
+        "options": {}
+      }
+    ],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null
+  }
+]
