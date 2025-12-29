@@ -4,8 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-GTM Wizard is an open-source AI-powered GTM operating system for solo founders. The core is an MCP (Model Context Protocol) server that packages Go-To-Market Engineering expertise for AI agents.
+GTM Wizard is an open-source AI-powered GTM operating system. The core is an MCP (Model Context Protocol) server that packages Go-To-Market Engineering expertise for AI agents.
 
+- **Website:** https://gtmwizard.io
 - **PyPI:** https://pypi.org/project/gtm-wizard/
 - **Current Version:** 0.2.1
 
@@ -78,14 +79,46 @@ gtm-wizard/
 1. Create markdown file in `packages/mcp-server/src/gtm_wizard/resources/foundations/`
 2. Register URI pattern in `server.py` `list_resources()` and `read_resource()`
 
-## Selected Tech Stack (for future packages)
+## Full Stack Development
 
-| Component | Technology |
-|-----------|------------|
-| Database | PocketBase |
-| Auth | PocketBase built-in |
-| AI Orchestration | LiteLLM (BYOK) |
-| Frontend | Next.js + shadcn/ui |
+```bash
+# Terminal 1: PocketBase (database)
+cd pocketbase && ./pocketbase serve
+
+# Terminal 2: Dashboard (Next.js)
+cd packages/dashboard && npm run dev
+
+# Terminal 3: MCP Server (if needed)
+uv run python -m gtm_wizard.server
+```
+
+## PocketBase Collections
+
+| Collection | Purpose |
+|------------|---------|
+| `users` | Auth (built-in) |
+| `api_keys` | AI provider keys (encrypted) |
+| `tool_connections` | Instantly/Apollo connections |
+| `daily_metrics` | Campaign performance data |
+| `chat_history` | AI coaching conversations |
+| `user_settings` | Onboarding, timezone, streak |
+
+## Dashboard Key Files
+
+| Component | Location |
+|-----------|----------|
+| Pages | `packages/dashboard/src/app/` |
+| Traffic Light | `packages/dashboard/src/components/TrafficLight.tsx` |
+| Auth Context | `packages/dashboard/src/contexts/AuthContext.tsx` |
+| PocketBase client | `packages/dashboard/src/lib/pocketbase.ts` |
+
+## Change Checklist
+
+After restructuring/moving files:
+- Update `.github/workflows/ci.yml` paths
+- Update `pyproject.toml` if Python paths changed
+- Update `Makefile` if command paths changed
+- Run `make test` locally before pushing
 
 ## Commit Guidelines
 
